@@ -1,0 +1,6 @@
+<a href="{% url 'accounts:logout' %}">Logout</a>
+<form action="{% url 'contacts:create' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
