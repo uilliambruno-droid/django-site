@@ -315,12 +315,31 @@ def test_was_published_recently_with_recent_question():
 
 This repository includes a `render.yaml` file at the root for one-click deployment.
 
+If your service was created as a regular **Web Service** (not Blueprint), Render may ignore `render.yaml` and use the default Python build command (`pip install -r requirements.txt`).
+
+To support this flow, the repository now includes:
+
+- `requirements.txt` (repo root)
+- `mysite/requirements.txt`
+
 ### Steps
 
 1. Push this repository to GitHub.
 2. Go to [Render](https://render.com) → **New** → **Blueprint** and connect your repository.
 3. Render will detect `render.yaml` and configure the service automatically.
 4. After the first deploy, update `DJANGO_ALLOWED_HOSTS` in the Render dashboard to include your app's domain (e.g. `your-app.onrender.com`).
+
+### If you created a regular Web Service (manual setup)
+
+Use these settings in Render:
+
+| Field | Value |
+|---|---|
+| Root Directory | `mysite` |
+| Build Command | `./build.sh` |
+| Start Command | `poetry run gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT` |
+
+If you prefer to keep Render's default build command, it will also work now because `requirements.txt` is present.
 
 ### Build & Start Commands
 
