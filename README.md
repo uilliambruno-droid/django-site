@@ -331,15 +331,16 @@ To support this flow, the repository now includes:
 
 ### If you created a regular Web Service (manual setup)
 
-Use these settings in Render:
+Use these settings in Render (free plan friendly):
 
 | Field | Value |
 |---|---|
-| Root Directory | `mysite` |
 | Build Command | `./build.sh` |
-| Start Command | `poetry run gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT` |
+| Start Command | `./start.sh` |
 
-If you prefer to keep Render's default build command, it will also work now because `requirements.txt` is present.
+`build.sh` and `start.sh` are now available at the repository root and internally switch to `mysite/`, so this works even when `Root Directory` is empty.
+
+If you prefer to keep Render's default build command, it will also work because `requirements.txt` is present at the repository root.
 
 ### Build & Start Commands
 
